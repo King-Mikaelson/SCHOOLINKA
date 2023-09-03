@@ -114,18 +114,18 @@ function getRandomDate(startDate: Date, endDate: Date) {
     }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("page", JSON.stringify(page));
-  }, [page]);
+  // useEffect(() => {
+  //   localStorage.setItem("page", JSON.stringify(page));
+  // }, [page]);
 
-    const baseURL = " https://jsonplaceholder.typicode.com/todos";
+  //   const baseURL = " https://jsonplaceholder.typicode.com/todos";
 
-    useEffect(() => {
-      axios.get(baseURL).then((response) => {
-        const data = updateArrayWithRandomValues(response.data)
-        setFetchedData(data)
-      });
-    }, []);
+  //   useEffect(() => {
+  //     axios.get(baseURL).then((response) => {
+  //       const data = updateArrayWithRandomValues(response.data)
+  //       setFetchedData(data)
+  //     });
+  //   }, []);
 
     console.log(fetchedData)
 

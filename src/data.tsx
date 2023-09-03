@@ -1,4 +1,4 @@
-import { Item, Todos } from "./types/types";
+import { Todos } from "./types/types";
 
 const todos = [
     {

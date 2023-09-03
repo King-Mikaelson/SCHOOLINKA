@@ -25,7 +25,7 @@ export default function CheckBox({item}: Props) {
 
     
     const handleChange = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        // e.stopPropagation()
+        e.stopPropagation()
         ToggleTextsCompletedById(item.id)
         console.log("clicked")
     }
@@ -54,15 +54,18 @@ export default function CheckBox({item}: Props) {
   
 
   return (
-    <div className="flex gap-4 items-center relative" onClick={() => navigate(`/task/${item.id}`)}>
+    <div className="flex  gap-4 items-center relative" onClick={() => navigate(`/task/${item.id}`)}>
     <div onClick={(e) => handleChange(e)} className={`${item.completed ?'checkbox-wrapper outline-none flex items-center justify-center border-[#3F5BF6] border border-solid duration-1000' : "checkbox-wrapper outline-none flex items-center justify-center border-[#D0D5DD] border border-solid duration-1000"}`}>
     <img src="/check.svg"  alt="check" color="#3F5BF6" className={`${item.completed ?' w-[0.875rem] h-[0.875rem]  outline-none duration-1000':'hidden duration-1000'}`}/>
     </div>
-    <div>
+    <div >
     <p className={`${item.completed ?'text-[#D0D5DD] font-workSans font-medium text-sm line-through cursor-pointer' :'text-[#101828] font-workSans font-medium text-sm cursor-pointer ' }`}>{item.title}</p>
-    {/* <p>{String(item.completed)}</p> */}
     <p className={`${item.completed ?'text-[#D0D5DD] font-workSans font-normal text-sm line-through cursor-pointer': 'text-[#475467] font-workSans font-normal text-sm cursor-pointer'}`}>
       {convert24to12(String(item.fromTime))} - {convert24to12(String(item.toTime))}</p>
+
+      {/* <p className="text-[#475467] font-workSans font-normal text-sm py-2 block md:hidden">
+                  Today
+      </p> */}
     </div>
     </div>
   )
