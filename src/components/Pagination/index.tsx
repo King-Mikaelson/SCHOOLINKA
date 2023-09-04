@@ -22,12 +22,12 @@ function PaginatedItems({ itemsPerPage }: any) {
   // from an API endpoint with useEffect and useState)
   const endOffset = itemOffset + itemsPerPage;
   console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = sortArray().slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(sortArray().length / itemsPerPage);
+  const currentItems = sortArray()?.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(sortArray()?.length / itemsPerPage);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event: { selected: any }) => {
-    const newOffset = (event.selected * itemsPerPage) % sortArray().length;
+    const newOffset = (event.selected * itemsPerPage) % sortArray()?.length;
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`
     );

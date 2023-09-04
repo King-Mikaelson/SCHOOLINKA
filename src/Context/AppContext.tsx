@@ -18,8 +18,10 @@ export const AppProvider: React.FC<AppContextProp> = ({ children }) => {
   const [limit, setLimit] = useState(7);
   const [date, setDate] = React.useState<Date>();
   const saved = JSON.parse(localStorage.getItem("texts")!);
-  const[fetchedData, setFetchedData]=useState("")
-  const [texts, setTexts] = useState<Item[] | []>(saved ? saved : todoData);
+  // const[fetchedData, setFetchedData]=useState([])
+  // const [texts, setTexts] = useState<Item[] | []>((saved && saved.length > 0) !== false ? saved : fetchedData);
+  const [texts, setTexts] = useState<Item[] | []>([]);
+  console.log(saved?.length > 0 )
 
   const formatDate = (date: Date, locale: string = "en-us"): string => {
     return date.toLocaleDateString(locale, {
@@ -37,6 +39,7 @@ export const AppProvider: React.FC<AppContextProp> = ({ children }) => {
     useEffect(()=> {
       sortArray()
     },[texts])
+
 
 
   function formatTime(inputTime: Date) {
@@ -79,7 +82,7 @@ function getRandomDate(startDate: Date, endDate: Date) {
   }
 
 
-  function updateArrayWithRandomValues(array: any) {
+  function updateArrayWithRandomValues(array:Item[]) {
     const startDate = new Date(2023, 0, 1); // January
     const endDate = new Date(2023, 7, 31); // August
 
@@ -114,20 +117,24 @@ function getRandomDate(startDate: Date, endDate: Date) {
     }
   }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem("page", JSON.stringify(page));
-  // }, [page]);
+  useEffect(() => {
+    localStorage.setItem("page", JSON.stringify(page));
+  }, [page]);
 
-  //   const baseURL = " https://jsonplaceholder.typicode.com/todos";
+    const baseURL = " https://jsonplaceholder.typicode.com/todos";
 
-  //   useEffect(() => {
-  //     axios.get(baseURL).then((response) => {
-  //       const data = updateArrayWithRandomValues(response.data)
-  //       setFetchedData(data)
-  //     });
-  //   }, []);
+    useEffect(() => {
+      axios.get(baseURL).then((response) => {
+        const data = updateArrayWithRandomValues(response.data)
+        if(!(saved && saved.length > 0)) {
+          setTexts(data)
+        }
+        else{
+          setTexts(saved)
+        }
+      });
+    }, []);
 
-    console.log(fetchedData)
 
   function addText(
     title: string,

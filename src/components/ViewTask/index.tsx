@@ -19,7 +19,7 @@ function ViewTask({}: Props) {
   const sheetRef = useRef<any>();
   const [expandOnContentDrag, setExpandOnContentDrag] = useState(true);
 
-  const item = texts.find((text) => text.id === Number(id))
+  const item = texts?.find((text) => text.id === Number(id))
 
   useEffect(() => {
     setOpen(true)

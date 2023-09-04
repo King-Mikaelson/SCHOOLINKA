@@ -1,9 +1,9 @@
 export type Item = {
   title:string,
-  date:any,
-  fromTime:string | number | Date,
+  date?:any,
+  fromTime?:string | number | Date,
   id:number,
-  toTime:string | number | Date,
+  toTime?:string | number | Date,
   completed:boolean,
   userId:number
 }

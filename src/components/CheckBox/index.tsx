@@ -8,10 +8,10 @@ import {useNavigate} from "react-router-dom"
 type Props = {
     item:{
       title:string,
-      date:string | Date,
-      fromTime:string | number | Date,
+      date?:string | Date,
+      fromTime?:string | number | Date,
       id:number,
-      toTime:string | number | Date,
+      toTime?:string | number | Date,
       completed:boolean,
       userId:number
     }
@@ -62,10 +62,6 @@ export default function CheckBox({item}: Props) {
     <p className={`${item.completed ?'text-[#D0D5DD] font-workSans font-medium text-sm line-through cursor-pointer' :'text-[#101828] font-workSans font-medium text-sm cursor-pointer ' }`}>{item.title}</p>
     <p className={`${item.completed ?'text-[#D0D5DD] font-workSans font-normal text-sm line-through cursor-pointer': 'text-[#475467] font-workSans font-normal text-sm cursor-pointer'}`}>
       {convert24to12(String(item.fromTime))} - {convert24to12(String(item.toTime))}</p>
-
-      {/* <p className="text-[#475467] font-workSans font-normal text-sm py-2 block md:hidden">
-                  Today
-      </p> */}
     </div>
     </div>
   )
