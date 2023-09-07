@@ -65,6 +65,8 @@ function App() {
           throw new Error("Function not implemented.");
         } } sortArray={function (): Item[] {
           throw new Error("Function not implemented.");
+        } } selectedTodo={null} setSelectedTodo={function (value: SetStateAction<string | number | null>): void {
+          throw new Error("Function not implemented.");
         } }      >
         <Header />
         <Hero />

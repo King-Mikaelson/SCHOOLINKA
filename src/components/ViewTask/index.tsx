@@ -13,7 +13,7 @@ function ViewTask({}: Props) {
   const { id } = useParams();
   console.log(id);
   const navigate = useNavigate();
-  const { DeleteTextsById,texts } = useContext(AppContext);
+  const { DeleteTextsById,texts, selectedTodo, setSelectedTodo} = useContext(AppContext);
   const [open, setOpen] = useState(false);
   const focusRef = useRef<HTMLButtonElement>();
   const sheetRef = useRef<any>();
@@ -21,17 +21,26 @@ function ViewTask({}: Props) {
 
   const item = texts?.find((text) => text.id === Number(id))
 
+  console.log(Boolean(item))
+
+
+  useEffect(() => {
+    setSelectedTodo(Number(id))
+  },[id])
+
   useEffect(() => {
     setOpen(true)
   },[])
 
   useEffect(() =>{
-    if(!Boolean(item)){
-    alert("This Todo has been Deleted")
-    navigate("/")
-    }
+    setTimeout(() => {
+      if(!Boolean(item)){
+        alert("This Todo has been Deleted")
+        navigate("/")
+        }
+    },3000)
+    
   },[texts])
-// console.log("This is " + Boolean(item))
 
   const formatDate = (date: Date, locale: string = "en-us"): string => {
     return date.toLocaleDateString(locale, {

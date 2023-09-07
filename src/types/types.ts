@@ -39,6 +39,8 @@ export interface AppContextProp {
   EditTextsById: (id: number, title: string, fromTime: string | number | Date, toTime: string | number | Date, date: any) => void,
   ToggleTextsCompletedById: (id: number) => void,
   DeleteTextsById: (id: number) => void,
-  sortArray: () => Item[]
+  sortArray: () => Item[],
+  selectedTodo: string | number | null,
+  setSelectedTodo: React.Dispatch<React.SetStateAction<string | number | null>>
 
 }

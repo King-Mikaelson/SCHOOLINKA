@@ -9,12 +9,13 @@ const AppContext = createContext<AppContextProp>(null!);
 export default AppContext;
 
 export const AppProvider: React.FC<AppContextProp> = ({ children }) => {
-  console.log(todoData);
+  // console.log(todoData);
 
   let currentPage = JSON.parse(localStorage.getItem("page")!);
   const [page, setPage] = useState<string | number>(
     currentPage ? currentPage : 0
   );
+  const [selectedTodo, setSelectedTodo] = useState<string | number | null>(null);
   const [limit, setLimit] = useState(7);
   const [date, setDate] = React.useState<Date>();
   const saved = JSON.parse(localStorage.getItem("texts")!);
@@ -98,6 +99,18 @@ function getRandomDate(startDate: Date, endDate: Date) {
     }
     return array
   }
+
+
+  useEffect(() => {
+    let currentTodo = localStorage.getItem("currentTodo");
+    if (currentTodo) {
+      setSelectedTodo(JSON.parse(currentTodo));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("currentTodo", JSON.stringify(selectedTodo));
+  }, [selectedTodo])
 
   useEffect(() => {
     const saved = localStorage.getItem("texts");
@@ -301,7 +314,9 @@ function getRandomDate(startDate: Date, endDate: Date) {
     DeleteTextsById,
     EditTextsById,
     ToggleTextsCompletedById,
-    sortArray
+    sortArray,
+    selectedTodo,
+    setSelectedTodo
   };
 
   return (
