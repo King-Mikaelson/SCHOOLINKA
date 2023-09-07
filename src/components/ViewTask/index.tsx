@@ -6,6 +6,7 @@ import AppContext from "../../Context/AppContext";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { BottomSheet } from "react-spring-bottom-sheet";
+import { toast } from "react-toastify";
 
 type Props = {};
 
@@ -35,7 +36,7 @@ function ViewTask({}: Props) {
   useEffect(() =>{
     setTimeout(() => {
       if(!Boolean(item)){
-        alert("This Todo has been Deleted")
+        toast.error("This Todo has been Deleted")
         navigate("/")
         }
     },3000)
