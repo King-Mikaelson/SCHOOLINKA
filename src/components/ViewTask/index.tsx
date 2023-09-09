@@ -22,26 +22,17 @@ function ViewTask({}: Props) {
 
   const item = texts?.find((text) => text.id === Number(id))
 
-  console.log(Boolean(item))
-
 
   useEffect(() => {
     setSelectedTodo(Number(id))
   },[id])
 
+
+
   useEffect(() => {
     setOpen(true)
   },[])
 
-  useEffect(() =>{
-    setTimeout(() => {
-      if(!Boolean(item)){
-        toast.error("This Todo has been Deleted")
-        navigate("/")
-        }
-    },3000)
-    
-  },[texts])
 
   const formatDate = (date: Date, locale: string = "en-us"): string => {
     return date.toLocaleDateString(locale, {
@@ -72,7 +63,6 @@ function ViewTask({}: Props) {
     return hours + ":" + (minutes < 10 ? "0" : "") + minutes + " " + period;
 }
 
-  // return (
   //   <div className="hidden md:flex flex-col w-full mx-3 px-5 py-5 border solid border-[#F2F4F7] rounded-[0.5rem] shadow-xl">
   //     <div className="self-end cursor-pointer" onClick={() => navigate(`/`)}>
   //       <GrFormClose size={25} />

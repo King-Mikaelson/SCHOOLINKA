@@ -1,16 +1,19 @@
-import React, { useState, createContext, useEffect, useCallback } from "react";
+import React, { useState, createContext, useEffect} from "react";
 import axios from "axios";
 import { AppContextProp, Item } from "../../src/types/types";
-import { toast } from "react-toastify";
+import {toast } from "react-toastify";
 import _ from "lodash";
 import todoData from "../data";
+import { useNavigate } from "react-router-dom";
 const AppContext = createContext<AppContextProp>(null!);
+
 
 export default AppContext;
 
 export const AppProvider: React.FC<AppContextProp> = ({ children }) => {
   // console.log(todoData);
 
+  const navigate = useNavigate();
   let currentPage = JSON.parse(localStorage.getItem("page")!);
   const [page, setPage] = useState<string | number>(
     currentPage ? currentPage : 0
@@ -84,8 +87,8 @@ function getRandomDate(startDate: Date, endDate: Date) {
 
 
   function updateArrayWithRandomValues(array:Item[]) {
-    const startDate = new Date(2023, 0, 1); // January
-    const endDate = new Date(2023, 7, 31); // August
+    const startDate = new Date(2023, 8, 1); // 1st September 
+    const endDate = new Date(2023, 8, 11); // 11th September
 
     for (let i = 0; i < array.length; i++) {
       const randomDate = formatDate(getRandomDate(startDate, endDate));
@@ -170,6 +173,7 @@ function getRandomDate(startDate: Date, endDate: Date) {
         userId: Math.floor(Math.random() * 10) + 1,
       },
     ]);
+    toast.success("Todo Added Successfully")
   }
 
   function ToggleTextsCompletedById(id: number) {
@@ -210,6 +214,8 @@ function getRandomDate(startDate: Date, endDate: Date) {
   function DeleteTextsById(id: number) {
     const newArray = texts.filter((text) => text.id !== id);
     setTexts(newArray);
+    toast.success("Todo Deleted Successfully")
+    navigate("/")
   }
 
 

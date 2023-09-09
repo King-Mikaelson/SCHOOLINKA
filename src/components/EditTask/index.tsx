@@ -6,6 +6,7 @@ import {useParams} from "react-router-dom"
 import {AiTwotoneBell} from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
 import { BottomSheet } from "react-spring-bottom-sheet";
+import { toast } from "react-toastify"
 
 
 
@@ -26,15 +27,15 @@ function EditTask() {
 
     const handleAddTexts = () =>{
       if(!text){
-        alert("Title can not be Empty")
+        toast.warn("Title can not be Empty")
         return
       }
       if(!date){
-        alert("Date can not be Empty")
+        toast.warn("Date can not be Empty")
         return
       }
-      if(!toTime && !fromTime){
-        alert("Time can not be Empty")
+      if(!toTime || !fromTime){
+        toast.warn("Time can not be Empty")
         return
       }
       EditTextsById(Number(id), text, fromTime, toTime, date);
@@ -106,7 +107,7 @@ function EditTask() {
                     <p>Cancel</p>
                   </button>
                   <button onClick={handleAddTexts} className="w-full py-2 bg-[#3F5BF6] border solid border-[#3F5BF6] shadow-sm rounded-[0.5rem] px-4 text-white font-workSans text-sm font-semibold ">
-                    <p>Add</p>
+                    <p>Save</p>
                   </button>
                 </div>
           </div>
@@ -144,7 +145,7 @@ function EditTask() {
                     <p>Cancel</p>
                   </button>
                   <button onClick={handleAddTexts} className="w-full py-2 bg-[#3F5BF6] border solid border-[#3F5BF6] shadow-sm rounded-[0.5rem] px-4 text-white font-workSans text-sm font-semibold ">
-                    <p>Add</p>
+                    <p>Save</p>
                   </button>
                 </div>
           </div>

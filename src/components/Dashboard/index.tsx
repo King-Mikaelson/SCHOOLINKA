@@ -24,7 +24,7 @@ function Dashboard() {
   const daysOfWeekForJanuary = generateDaysOfWeekForMonth(year, month);
 
   const [selectedItemIndex, setSelectedItemIndex] = useState<null | number>(
-    null
+    1
   );
 
   const handleItemClick = (index: number) => {

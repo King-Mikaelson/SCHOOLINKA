@@ -12,6 +12,7 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import ViewTask from "./components/ViewTask";
 import BottomMobileInput from "./BottomMobileInput";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (

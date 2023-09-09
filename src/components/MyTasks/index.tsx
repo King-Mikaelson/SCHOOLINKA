@@ -1,8 +1,12 @@
-import CheckBox from "../CheckBox";
 import AppContext from "../../Context/AppContext";
 import { Item } from "../../../src/types/types";
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext} from "react";
+import dayjs from "dayjs";
+import relativeTime from 'dayjs/plugin/relativeTime'
+import updateLocale from 'dayjs/plugin/updateLocale';
+import calendar from 'dayjs/plugin/calendar'
+
 
 function MyTasks({ currentItems }: any) {
   const { ToggleTextsCompletedById, selectedTodo } = useContext(AppContext);
@@ -33,6 +37,31 @@ function MyTasks({ currentItems }: any) {
     // Return the converted time as a string
     return hours + ":" + (minutes < 10 ? "0" : "") + minutes + " " + period;
   }
+  
+
+  dayjs.extend(updateLocale)
+  dayjs.extend(relativeTime)
+
+
+
+
+dayjs.extend(calendar)
+
+
+dayjs.updateLocale('en', {
+  calendar: {
+    sameDay: '[Today]',
+    nextDay: '[Tomorrow]',
+    lastDay: '[Yesterday]',
+    lastWeek: '[Last week]',
+    nextWeek: '[Next week]',
+    sameElse: "dddd"
+  }
+})
+// console.log(dayjs().calendar(dayjs().add(1, 'day')))
+
+console.log(dayjs("August 24, 2023").calendar())
+
 
 
   return (
@@ -95,7 +124,7 @@ function MyTasks({ currentItems }: any) {
             </div>
             <div>
               <p className="text-[#475467] font-workSans font-normal text-sm">
-                Today
+               {dayjs(item.date).calendar()}
               </p>
             </div>
           </div>

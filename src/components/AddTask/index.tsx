@@ -4,6 +4,7 @@ import { DatePickerWithPresets } from "../DatePickerWithPresets";
 import AppContext from "../../Context/AppContext";
 import { useNavigate } from "react-router-dom";
 import { BottomSheet } from "react-spring-bottom-sheet";
+import { toast } from "react-toastify";
 
 function AddTask() {
   const [text, setText] = useState("Create Wireframe");
@@ -15,15 +16,15 @@ function AddTask() {
 
   const handleAddTexts = () => {
     if (!text) {
-      alert("Title can not be Empty");
+      toast.warn("Title can not be Empty");
       return;
     }
     if (!date) {
-      alert("Date can not be Empty");
+      toast.warn("Date can not be Empty");
       return;
     }
-    if (!toTime && !fromTime) {
-      alert("Time can not be Empty");
+    if (!toTime || !fromTime) {
+      toast.warn("Time can not be Empty");
       return;
     }
     addText(text, fromTime, toTime, date);
@@ -42,9 +43,9 @@ function AddTask() {
   const sheetRef = useRef<any>();
   const [expandOnContentDrag, setExpandOnContentDrag] = useState(true);
 
-    useEffect(() => {
-    setOpen(true)
-  },[])
+  useEffect(() => {
+    setOpen(true);
+  }, []);
   return (
     <>
       <div className="block md:hidden">
@@ -129,7 +130,10 @@ function AddTask() {
                 <p>Cancel</p>
               </button>
               <button
-                onClick={() => {handleAddTexts(); navigate("/")}}
+                onClick={() => {
+                  handleAddTexts();
+                  navigate("/");
+                }}
                 className="w-full py-2 bg-[#3F5BF6] border solid border-[#3F5BF6] shadow-sm rounded-[0.5rem] px-4 text-white font-workSans text-sm font-semibold cursor-pointer "
               >
                 <p>Add</p>
@@ -216,13 +220,6 @@ function AddTask() {
 }
 
 export default AddTask;
-
-
-
-
-
-
-
 
 // import { useState, useContext, useRef, useEffect } from "react";
 // import { AiOutlineClose, AiTwotoneBell } from "react-icons/ai";
@@ -442,4 +439,3 @@ export default AddTask;
 // }
 
 // export default AddTask;
-
