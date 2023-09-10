@@ -1,12 +1,11 @@
-import React, { useState, createContext, useEffect} from "react";
+import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
 import { AppContextProp, Item } from "../../src/types/types";
-import {toast } from "react-toastify";
+import { toast } from "react-toastify";
 import _ from "lodash";
 import todoData from "../data";
 import { useNavigate } from "react-router-dom";
 const AppContext = createContext<AppContextProp>(null!);
-
 
 export default AppContext;
 
@@ -14,18 +13,19 @@ export const AppProvider: React.FC<AppContextProp> = ({ children }) => {
   // console.log(todoData);
 
   const navigate = useNavigate();
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   let currentPage = JSON.parse(localStorage.getItem("page")!);
   const [page, setPage] = useState<string | number>(
     currentPage ? currentPage : 0
   );
-  const [selectedTodo, setSelectedTodo] = useState<string | number | null>(null);
-  const [limit, setLimit] = useState(7);
+  const [selectedTodo, setSelectedTodo] = useState<string | number | null>(
+    null
+  );
   const [date, setDate] = React.useState<Date>();
   const saved = JSON.parse(localStorage.getItem("texts")!);
   // const[fetchedData, setFetchedData]=useState([])
   // const [texts, setTexts] = useState<Item[] | []>((saved && saved.length > 0) !== false ? saved : fetchedData);
-  const [texts, setTexts] = useState<Item[] | []>([]);
-  console.log(saved?.length > 0 )
+  const [texts, setTexts] = useState<Item[] | [] >([]);
 
   const formatDate = (date: Date, locale: string = "en-us"): string => {
     return date.toLocaleDateString(locale, {
@@ -35,15 +35,20 @@ export const AppProvider: React.FC<AppContextProp> = ({ children }) => {
     });
   };
 
-  const sortArray = () =>{
+  const sortArray = () => {
     let sortedArray = texts?.sort((a, b) => b.id - a.id)
-    return sortedArray
-    }
+      return sortedArray;
+  };
 
-    useEffect(()=> {
-      sortArray()
-    },[texts])
-
+  // A function that return todos by filtered dates
+  const returnFilteredDates = () => {
+    return sortArray().filter((item) => item.date === formatDate(selectedDate!))
+  }
+ 
+  console.log(returnFilteredDates())
+  useEffect(() => {
+    sortArray();
+  }, [texts]);
 
 
   function formatTime(inputTime: Date) {
@@ -69,7 +74,7 @@ export const AppProvider: React.FC<AppContextProp> = ({ children }) => {
     return formattedTime;
   }
 
-function getRandomDate(startDate: Date, endDate: Date) {
+  function getRandomDate(startDate: Date, endDate: Date) {
     const startTimestamp = startDate.getTime();
     const endTimestamp = endDate.getTime();
     const randomTimestamp =
@@ -85,9 +90,8 @@ function getRandomDate(startDate: Date, endDate: Date) {
     return new Date(0, 0, 0, hours, minutes, seconds);
   }
 
-
-  function updateArrayWithRandomValues(array:Item[]) {
-    const startDate = new Date(2023, 8, 1); // 1st September 
+  function updateArrayWithRandomValues(array: Item[]) {
+    const startDate = new Date(2023, 8, 1); // 1st September
     const endDate = new Date(2023, 8, 11); // 11th September
 
     for (let i = 0; i < array.length; i++) {
@@ -100,9 +104,8 @@ function getRandomDate(startDate: Date, endDate: Date) {
       array[i].fromTime = randomFromTime;
       array[i].toTime = randomToTime;
     }
-    return array
+    return array;
   }
-
 
   useEffect(() => {
     let currentTodo = localStorage.getItem("currentTodo");
@@ -113,7 +116,7 @@ function getRandomDate(startDate: Date, endDate: Date) {
 
   useEffect(() => {
     localStorage.setItem("currentTodo", JSON.stringify(selectedTodo));
-  }, [selectedTodo])
+  }, [selectedTodo]);
 
   useEffect(() => {
     const saved = localStorage.getItem("texts");
@@ -137,20 +140,18 @@ function getRandomDate(startDate: Date, endDate: Date) {
     localStorage.setItem("page", JSON.stringify(page));
   }, [page]);
 
-    const baseURL = " https://jsonplaceholder.typicode.com/todos";
+  const baseURL = " https://jsonplaceholder.typicode.com/todos";
 
-    useEffect(() => {
-      axios.get(baseURL).then((response) => {
-        const data = updateArrayWithRandomValues(response.data)
-        if(!(saved && saved.length > 0)) {
-          setTexts(data)
-        }
-        else{
-          setTexts(saved)
-        }
-      });
-    }, []);
-
+  useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      const data = updateArrayWithRandomValues(response.data);
+      if (!(saved && saved.length > 0)) {
+        setTexts(data);
+      } else {
+        setTexts(saved);
+      }
+    });
+  }, []);
 
   function addText(
     title: string,
@@ -173,7 +174,7 @@ function getRandomDate(startDate: Date, endDate: Date) {
         userId: Math.floor(Math.random() * 10) + 1,
       },
     ]);
-    toast.success("Todo Added Successfully")
+    toast.success("Todo Added Successfully");
   }
 
   function ToggleTextsCompletedById(id: number) {
@@ -214,104 +215,17 @@ function getRandomDate(startDate: Date, endDate: Date) {
   function DeleteTextsById(id: number) {
     const newArray = texts.filter((text) => text.id !== id);
     setTexts(newArray);
-    toast.success("Todo Deleted Successfully")
-    navigate("/")
+    toast.success("Todo Deleted Successfully");
+    navigate("/");
   }
 
 
-  // Function for Pagination
 
-  const getTasks = 
-    function () {
-      let array: any = [];
-      for (let i = (Number(page) - 1) * limit; i < Number(page) * limit; i++) {
-        const item = texts[i];
-        if (item !== undefined) {
-          array.push(item);
-        }
-      }
-      return array;
-    }
 
-//   useEffect(() => {
-//     getTasks();
-//   }, [texts]);
-
-  const getLength = function () {
-    return texts?.length;
-  };
-
-  let totalPage = Math.floor(getLength() / limit);
-  console.log(totalPage);
-
-  const returnPaginationRange = (sibilings: number) => {
-    let totalTotalPageNoInArray = 3 + sibilings;
-    if (totalTotalPageNoInArray >= totalPage) {
-      return _.range(1, totalPage + 1);
-    }
-
-    let leftSiblingsIndex = Math.max(Number(page) - sibilings, 1);
-    let rightSiblingsIndex = Math.min(Number(page) + sibilings, totalPage);
-
-    let showLeftdots = leftSiblingsIndex > 2;
-    let showRightdots = rightSiblingsIndex < totalPage - 2;
-
-    if (!showLeftdots && showRightdots) {
-      let leftItemsCount = 3 + 2 * sibilings;
-      let leftRange = _.range(1, leftItemsCount + 1);
-      return [...leftRange, "...", totalPage];
-    } else if (showLeftdots && !showRightdots) {
-      let rightItemsCount = 3 + 2 * sibilings;
-      let rightRange = _.range(totalPage - rightItemsCount + 1, totalPage + 1);
-      return [1, "... ", ...rightRange];
-    } else {
-      let middleRange = _.range(leftSiblingsIndex, rightSiblingsIndex + 1);
-      return [1, "... ", ...middleRange, "...", totalPage];
-    }
-  };
-
-  const handlePreviousButton = () => {
-    if (page !== 1) {
-      setPage((value) => Number(value) - 1);
-    } else {
-      setPage(1);
-    }
-  };
-
-  const handleNextButton = () => {
-    if (page !== totalPage) {
-      setPage((value) => Number(value) + 1);
-      console.log(totalPage);
-    } else if (page === totalPage) {
-      setPage(1);
-    } else {
-      setPage(1);
-    }
-  };
-
-  const handleNumberButton = (value: number | string) => {
-    if (value === "... ") {
-      setPage(totalPage);
-    } else if (value === "...") {
-      setPage(1);
-    } else {
-      setPage(value);
-    }
-    console.log(value);
-  };
 
   const contextData = {
     page,
     setPage,
-    limit,
-    setLimit,
-    getTasks,
-    getLength,
-    totalPage,
-    returnPaginationRange,
-    handleNextButton,
-    handlePreviousButton,
-    handleNumberButton,
     date,
     setDate,
     texts,
@@ -322,7 +236,11 @@ function getRandomDate(startDate: Date, endDate: Date) {
     ToggleTextsCompletedById,
     sortArray,
     selectedTodo,
-    setSelectedTodo
+    setSelectedTodo,
+    selectedDate,
+    setSelectedDate,
+    returnFilteredDates,
+    formatDate
   };
 
   return (

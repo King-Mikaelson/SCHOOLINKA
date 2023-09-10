@@ -22,15 +22,6 @@ export interface AppContextProp {
   children?: React.ReactNode,
   page?: number | string,
   setPage?: React.Dispatch<React.SetStateAction<number | string>>,
-  limit?: number,
-  setLimit?: React.Dispatch<React.SetStateAction<number>>,
-  getTasks: any,
-  getLength: () => number,
-  totalPage: number,
-  returnPaginationRange: (sibilings: number) => (string | number)[],
-  handleNextButton:() => void,
-  handlePreviousButton:() => void,
-  handleNumberButton:(value:number| string) => void,
   date: any,
   setDate: React.Dispatch<React.SetStateAction<Date | undefined>>,
   texts:Item[],
@@ -41,6 +32,10 @@ export interface AppContextProp {
   DeleteTextsById: (id: number) => void,
   sortArray: () => Item[],
   selectedTodo: string | number | null,
-  setSelectedTodo: React.Dispatch<React.SetStateAction<string | number | null>>
+  setSelectedTodo: React.Dispatch<React.SetStateAction<string | number | null>>,
+  setSelectedDate: React.Dispatch<React.SetStateAction<Date | null>>,
+  selectedDate: Date | null,
+  returnFilteredDates: () => Item[],
+  formatDate: (date: Date, locale?: string) => string
 
 }

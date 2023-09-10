@@ -1,24 +1,25 @@
 import AppContext from "../../Context/AppContext";
 import { Item } from "../../../src/types/types";
 import { useNavigate } from "react-router-dom";
-import { useContext} from "react";
+import { useContext } from "react";
 import dayjs from "dayjs";
-import relativeTime from 'dayjs/plugin/relativeTime'
-import updateLocale from 'dayjs/plugin/updateLocale';
-import calendar from 'dayjs/plugin/calendar'
-
+import updateLocale from "dayjs/plugin/updateLocale";
+import calendar from "dayjs/plugin/calendar";
 
 function MyTasks({ currentItems }: any) {
-  const { ToggleTextsCompletedById, selectedTodo } = useContext(AppContext);
+  const { ToggleTextsCompletedById, selectedTodo,selectedDate, formatDate } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const handleChange = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, item:number) => {
+  const handleChange = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    item: number
+  ) => {
     e.stopPropagation();
     ToggleTextsCompletedById(item);
     console.log("clicked");
   };
 
-  function convert24to12(inputTime: string) {
+  function convert24hrsto12hrs(inputTime: string) {
     // Split the input time into hours and minutes
     var timeParts = inputTime.split(":");
     var hours = parseInt(timeParts[0]);
@@ -37,31 +38,21 @@ function MyTasks({ currentItems }: any) {
     // Return the converted time as a string
     return hours + ":" + (minutes < 10 ? "0" : "") + minutes + " " + period;
   }
-  
 
-  dayjs.extend(updateLocale)
-  dayjs.extend(relativeTime)
+  dayjs.extend(updateLocale);
 
+  dayjs.extend(calendar);
 
-
-
-dayjs.extend(calendar)
-
-
-dayjs.updateLocale('en', {
-  calendar: {
-    sameDay: '[Today]',
-    nextDay: '[Tomorrow]',
-    lastDay: '[Yesterday]',
-    lastWeek: '[Last week]',
-    nextWeek: '[Next week]',
-    sameElse: "dddd"
-  }
-})
-// console.log(dayjs().calendar(dayjs().add(1, 'day')))
-
-console.log(dayjs("August 24, 2023").calendar())
-
+  dayjs.updateLocale("en", {
+    calendar: {
+      sameDay: "[Today]",
+      nextDay: "[Tomorrow]",
+      lastDay: "[Yesterday]",
+      lastWeek: "[Last week]",
+      nextWeek: "[Next week]",
+      sameElse: "dddd",
+    },
+  });
 
 
   return (
@@ -71,22 +62,25 @@ console.log(dayjs("August 24, 2023").calendar())
       </h2>
 
       <div className="flex flex-col gap-5 py-4">
-        {currentItems &&
+        {currentItems.length > 0 ?
           currentItems?.map((item: Item, index: number) => (
             <div
-            key={item.id}
-            onClick={() => {
-              navigate(`/task/${item.id}`);
-            }}
-            className={`${selectedTodo === item.id ? "w-full flex justify-between px-6 py-4 bg-[#EAEDFE] border-[#EAECF0] solid border-b items-center": "w-full flex justify-between px-6 py-4 bg-[#F9FAFB] border-[#EAECF0] solid border-b items-center"}`}
-          >
-            <div className="flex  gap-4 items-center relative">
+              key={item.id}
+              onClick={() => {
+                navigate(`/task/${item.id}`);
+              }}
+              className={`${
+                selectedTodo === item.id
+                  ? " grid grid-cols-[50px,1fr,100px]  lg:flex lg:px-6 px-3 py-4 bg-[#EAEDFE] border-[#EAECF0] solid border-b items-center"
+                  : " lg:flex  lg:px-6 px-3 py-4 bg-[#F9FAFB] border-[#EAECF0] solid border-b items-center grid grid-cols-[50px,1fr,100px] "
+              }`}
+            >
               <div
                 onClick={(e) => handleChange(e, item.id)}
                 className={`${
                   item.completed
-                    ? "checkbox-wrapper outline-none flex items-center justify-center border-[#3F5BF6] border border-solid duration-1000"
-                    : "checkbox-wrapper outline-none flex items-center justify-center border-[#D0D5DD] border border-solid duration-1000"
+                    ? "checkbox-wrapper outline-none flex items-center justify-center border-[#3F5BF6] border border-solid duration-1000 self-center md:mr-4   w-[1.25rem] h-[1.25rem] bg-white rounded-[0.375rem]"
+                    : "checkbox-wrapper outline-none flex items-center justify-center border-[#D0D5DD] border border-solid duration-1000 self-center md:mr-4 w-[1.25rem] h-[1.25rem] bg-white rounded-[0.375rem]"
                 }`}
               >
                 <img
@@ -100,7 +94,7 @@ console.log(dayjs("August 24, 2023").calendar())
                   }`}
                 />
               </div>
-              <div>
+              <div className="self-start w-full h-full flex flex-col gap-1">
                 <p
                   className={`${
                     item.completed
@@ -117,18 +111,17 @@ console.log(dayjs("August 24, 2023").calendar())
                       : "text-[#475467] font-workSans font-normal text-sm cursor-pointer"
                   }`}
                 >
-                  {convert24to12(String(item.fromTime))} -{" "}
-                  {convert24to12(String(item.toTime))}
+                  {convert24hrsto12hrs(String(item.fromTime))} -{" "}
+                  {convert24hrsto12hrs(String(item.toTime))}
+                </p>
+              </div>
+              <div className="self-center ml-auto">
+                <p className="text-[#475467] font-workSans font-normal text-sm lg:whitespace-nowrap">
+                  {dayjs(item.date).calendar()}
                 </p>
               </div>
             </div>
-            <div>
-              <p className="text-[#475467] font-workSans font-normal text-sm">
-               {dayjs(item.date).calendar()}
-              </p>
-            </div>
-          </div>
-          ))}
+          )) : <div className="text-[#101828] font-workSans font-medium text-xl cursor-pointer py-10  flex justify-center items-center"><p>There are no Tasks for {`${formatDate(selectedDate!)}.`}</p></div>}
       </div>
     </div>
   );

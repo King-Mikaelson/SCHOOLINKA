@@ -19,29 +19,8 @@ function App() {
     <div className="App">
       <ToastContainer />
       <AppProvider
-        getLength={function (): number {
-          throw new Error("Function not implemented.");
-        } }
-        totalPage={0}
-        returnPaginationRange={function (
-          sibilings: number
-        ): (string | number)[] {
-          throw new Error("Function not implemented.");
-        } }
-        handleNextButton={function (): void {
-          throw new Error("Function not implemented.");
-        } }
-        handlePreviousButton={function (): void {
-          throw new Error("Function not implemented.");
-        } }
-        handleNumberButton={function (value: number | string): void {
-          throw new Error("Function not implemented.");
-        } }
         date={undefined}
         setDate={function (value: SetStateAction<Date | undefined>): void {
-          throw new Error("Function not implemented.");
-        } }
-        getTasks={function (): Item[] {
           throw new Error("Function not implemented.");
         } }
         texts={[]}
@@ -67,6 +46,12 @@ function App() {
         } } sortArray={function (): Item[] {
           throw new Error("Function not implemented.");
         } } selectedTodo={null} setSelectedTodo={function (value: SetStateAction<string | number | null>): void {
+          throw new Error("Function not implemented.");
+        } } setSelectedDate={function (value: SetStateAction<Date | null>): void {
+          throw new Error("Function not implemented.");
+        } } selectedDate={null} returnFilteredDates={function (): Item[] {
+          throw new Error("Function not implemented.");
+        } } formatDate={function (date: Date, locale?: string | undefined): string {
           throw new Error("Function not implemented.");
         } }      >
         <Header />

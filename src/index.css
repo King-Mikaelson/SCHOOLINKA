@@ -77,17 +77,6 @@
   }
 }
 
-.checkbox-wrapper {
-  /* removing default appearance */
-  /* -webkit-appearance: none;
-  appearance: none; */
-  /* creating a custom design */
-  width: 1.25rem;
-  height: 1.25rem;
-  cursor: pointer;
-  border-radius: 0.375rem;
-  background: #fff;
-}
 
 .react-datepicker-wrapper {
   display: block;

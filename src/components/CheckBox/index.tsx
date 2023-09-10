@@ -22,7 +22,6 @@ export default function CheckBox({ item }: Props) {
   const handleChange = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     ToggleTextsCompletedById(item.id);
-    console.log("clicked");
   };
 
   function convert24to12(inputTime: string) {

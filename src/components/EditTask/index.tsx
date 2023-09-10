@@ -14,7 +14,6 @@ function EditTask() {
   const [toTime, setToTime] = useState("")
   const [fromTime, setFromTime] = useState("")
   const{id} = useParams();
-  console.log(id)
   const{EditTextsById, date, texts} = useContext(AppContext)
   const item = texts.find((text) => text.id === Number(id))
   const[text, setText] = useState(item?.title)
@@ -39,15 +38,6 @@ function EditTask() {
         return
       }
       EditTextsById(Number(id), text, fromTime, toTime, date);
-      // setToTime("");
-      // setFromTime("");
-      console.log(text)
-      console.log(fromTime)
-      console.log(toTime)
-      // console.log(date)
-      console.log(texts)
-      // setText("");
-      // setDate(undefined)
     }
   
   const focusRef = useRef<HTMLButtonElement>();
@@ -117,7 +107,9 @@ function EditTask() {
       <div className="hidden md:flex flex-col w-full mx-3 px-2 py-5 border border-t-0 solid border-[#F2F4F7] rounded-[0.5rem] shadow-xl">
            <div className="w-full flex justify-between items-center">
               <h4 className="font-workSans text-[#101828] font-semibold text-lg">Edit Task</h4>
-              <AiOutlineClose size={22} color={"#667085"} className="text-[#667085] cursor-pointer"/>
+              <AiOutlineClose  onClick={() => {
+              navigate("/");
+            }} size={22} color={"#667085"} className="text-[#667085] cursor-pointer"/>
            </div>
            <div className="py-4">
               <textarea value={text} onChange={(e) => {setText(e.target.value)}} className="border solid border-[#D0D5DD] shadow-sm rounded-[0.5rem] bg-[#F9FAFB] w-full h-[9rem] px-4 py-4 text-[#667085] font-workSans text-base font-normal">Create Wireframe</textarea>

@@ -1,4 +1,3 @@
-import CheckBox from "../CheckBox";
 import {
   useContext,
   useState,
@@ -11,7 +10,7 @@ import MyTasks from "../MyTasks";
 type Props = {};
 
 function PaginatedItems({ itemsPerPage }: any) {
-  const { sortArray,page,setPage } = useContext(AppContext);
+  const { sortArray,page,setPage,returnFilteredDates} = useContext(AppContext);
 
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
@@ -21,18 +20,18 @@ function PaginatedItems({ itemsPerPage }: any) {
   // (This could be items from props; or items loaded in a local state
   // from an API endpoint with useEffect and useState)
   const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = sortArray()?.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(sortArray()?.length / itemsPerPage);
+  // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  const currentItems = returnFilteredDates()?.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(returnFilteredDates()?.length / itemsPerPage);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event: { selected: any }) => {
-    const newOffset = (event.selected * itemsPerPage) % sortArray()?.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
+    const newOffset = (event.selected * itemsPerPage) % returnFilteredDates()?.length;
+    // console.log(
+    //   `User requested page number ${event.selected}, which is offset ${newOffset}`
+    // );
     setItemOffset(newOffset);
-    console.log(itemOffset)
+    // console.log(itemOffset)
     // setPage?.(event.selected)
     // event.selected = page
   };

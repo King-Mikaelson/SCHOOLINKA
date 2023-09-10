@@ -30,15 +30,15 @@ function AddTask() {
     addText(text, fromTime, toTime, date);
     setToTime("");
     setFromTime("");
-    console.log(text);
-    console.log(fromTime);
-    console.log(toTime);
-    console.log(date);
+    // console.log(text);
+    // console.log(fromTime);
+    // console.log(toTime);
+    // console.log(date);
     setText("");
     setDate(undefined);
   };
 
-  console.log(texts);
+  // console.log(texts);
   const focusRef = useRef<HTMLButtonElement>();
   const sheetRef = useRef<any>();
   const [expandOnContentDrag, setExpandOnContentDrag] = useState(true);

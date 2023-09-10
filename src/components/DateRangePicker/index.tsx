@@ -1,13 +1,14 @@
-import  { useState } from "react";
+import  { useContext, useState } from "react";
 import dayjs from "dayjs";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import AppContext from "../../Context/AppContext";
 
 export default function DateRangePicker() {
 
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const currentDate = new Date();
+  const {selectedDate, setSelectedDate} = useContext(AppContext)
 
   
 
@@ -20,7 +21,7 @@ export default function DateRangePicker() {
         selected={selectedDate}
         onChange={( date: Date | null) => {
           setSelectedDate(date);
-          console.log("date", date);
+          // console.log("date", date);
         }}
         onMonthChange={(date) => {
           // setSelectedDate(date);
