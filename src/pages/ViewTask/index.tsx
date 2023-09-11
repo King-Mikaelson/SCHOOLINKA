@@ -31,13 +31,6 @@ function ViewTask() {
   },[])
 
 
-  const formatDate = (date: Date, locale: string = "en-us"): string => {
-    return date.toLocaleDateString(locale, {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  };
 
 
   function convert24to12(inputTime:string) {
@@ -129,7 +122,7 @@ function ViewTask() {
         <div className="flex gap-2 py-1 items-center">
           <IoCalendarClearOutline size={20} color="#3F5BF6" />
           <p className="font-workSans text-base text-[#272727] font-medium">
-           {item?.date}
+           {`${item?.date}`}
           </p>
         </div>
 
@@ -171,7 +164,7 @@ function ViewTask() {
         <div className="flex gap-2 py-1 items-center">
           <IoCalendarClearOutline size={20} color="#3F5BF6" />
           <p className="font-workSans text-base text-[#272727] font-medium">
-           {item?.date}
+           {`${item?.date}`}
           </p>
         </div>
 

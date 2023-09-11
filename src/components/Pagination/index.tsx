@@ -7,7 +7,6 @@ import ReactPaginate from "react-paginate";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import MyTasks from "../MyTasks";
 
-type Props = {};
 
 function PaginatedItems({ itemsPerPage }: any) {
   const { sortArray,page,setPage,returnFilteredDates} = useContext(AppContext);

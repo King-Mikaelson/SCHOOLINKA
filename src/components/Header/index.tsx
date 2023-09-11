@@ -1,10 +1,9 @@
 import {FiSettings} from "react-icons/fi";
 import {BsBell} from "react-icons/bs"
 import {HiMenuAlt1} from "react-icons/hi"
-type Props = {}
 
 
-function Header({}: Props) {
+function Header() {
   return (
     <div className="fixed z-30 top-0 w-full py-6 flex justify-between px-6 lg:px-14   border-b solid border-[#EAECF0] bg-white items-center">
     <h1 className="font-inter text-2xl font-bold text-black">ToDo</h1>

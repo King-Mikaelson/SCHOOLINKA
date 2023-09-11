@@ -39,7 +39,6 @@ function EditTask() {
       EditTextsById(Number(id), text, fromTime, toTime, date);
     }
   
-  const focusRef = useRef<HTMLButtonElement>();
   const sheetRef = useRef<any>();
   const [expandOnContentDrag, setExpandOnContentDrag] = useState(true);
 

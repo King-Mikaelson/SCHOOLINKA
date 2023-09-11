@@ -10,7 +10,7 @@ function AddTask() {
   const [text, setText] = useState("Create Wireframe");
   const [toTime, setToTime] = useState("");
   const [fromTime, setFromTime] = useState("");
-  const { date, setDate, addText, texts } = useContext(AppContext);
+  const { date, setDate, addText } = useContext(AppContext);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 

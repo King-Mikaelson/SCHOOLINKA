@@ -1,12 +1,9 @@
-import React from 'react';
-import {FiSettings} from "react-icons/fi"
 import{AiOutlinePlus} from "react-icons/ai"
-import {useNavigate, Link} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 
 
-type Props = {}
 
-function Hero({}: Props) {
+function Hero() {
   const navigate = useNavigate()
   return (
     <div className="w-full mt-20 md:py-11 py-6 pb-6 flex justify-between px-6  lg:px-14  items-center">
