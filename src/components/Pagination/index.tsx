@@ -31,7 +31,7 @@ function PaginatedItems({ itemsPerPage }: any) {
     // );
     setItemOffset(newOffset);
     // console.log(itemOffset)
-    // setPage?.(event.selected)
+    setPage?.(event.selected)
     // event.selected = page
   };
 
@@ -39,7 +39,7 @@ function PaginatedItems({ itemsPerPage }: any) {
     <>
       <MyTasks currentItems={currentItems} />
       <ReactPaginate
-      // forcePage={Number(page)}
+      forcePage={Number(page)}
         breakLabel="..."
         nextLabel={
           <div className="flex gap-2 items-center cursor-pointer">
@@ -75,3 +75,111 @@ function PaginatedItems({ itemsPerPage }: any) {
 export default function Pagination() {
   return <PaginatedItems itemsPerPage={7} />;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import {
+//   useContext,
+//   useEffect,
+//   useState,
+// } from "react";
+// import AppContext from "../../Context/AppContext";
+// import ReactPaginate from "react-paginate";
+// import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+// import MyTasks from "../MyTasks";
+
+
+// function PaginatedItems({ itemsPerPage }: any) {
+//   const { sortArray,page,setPage,returnFilteredDates} = useContext(AppContext);
+
+  
+
+
+//   // const [currentPage, setCurrentPage] = useState(0);
+//   const [totalPages, setTotalPages] = useState(0);
+
+//   useEffect(() => {
+//     setTotalPages(Math.ceil(returnFilteredDates()?.length / itemsPerPage));
+//   }, [itemsPerPage, returnFilteredDates, totalPages]);
+
+//   const startIndex = Number(page) * itemsPerPage;
+//   const endIndex = startIndex + itemsPerPage;
+//   const subset =  returnFilteredDates()?.slice(startIndex, endIndex);
+
+//   const handlePageChange = (selectedPage:any) => {
+//     setPage?.(selectedPage.selected);
+//   };
+
+//   console.log(page, totalPages)
+
+//   return (
+//     <>
+//       <MyTasks currentItems={subset} />
+//       <ReactPaginate
+//         breakLabel="..."
+//         nextLabel={
+//           <div className="flex gap-2 items-center cursor-pointer">
+//             <p>Next</p>
+//             <AiOutlineArrowRight />
+//           </div>
+//         }
+//         onPageChange={handlePageChange}
+//         forcePage={Number(page)}
+//         pageRangeDisplayed={3}
+//         pageCount={totalPages}
+//         previousLabel={
+//           <div className="flex gap-2 items-center cursor-pointer">
+//             <AiOutlineArrowLeft />
+//             <p>Previous</p>
+//           </div>
+//         }
+//         renderOnZeroPageCount={null}
+//         pageClassName="flex justify-center items-center font-sans  text-[#1D2939] text-sm font-medium"
+//         pageLinkClassName="flex gap-1 items-center font-sans  text-[#1D2939] text-sm font-medium"
+//         previousClassName="page-item"
+//         previousLinkClassName="page-link"
+//         nextClassName="flex gap-2 items-center cursor-pointer"
+//         nextLinkClassName="flex gap-2 items-center cursor-pointer"
+//         breakClassName="page-item"
+//         breakLinkClassName="page-link"
+//         containerClassName="flex justify-between items-center pb-24 pt-7 border-t solid border-spacing-28 gap-1"
+//         activeClassName="text-[#1D2939] shadow-sm bg-[#F9FAFB] py-2 px-4 flex justify-center items-center rounded-full cursor-pointer"
+//       />
+//     </>
+//   );
+// }
+
+// export default function Pagination() {
+//   return <PaginatedItems itemsPerPage={7} />;
+// }

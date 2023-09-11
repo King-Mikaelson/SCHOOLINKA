@@ -11,10 +11,7 @@ export const AppProvider: React.FC<AppContextProp> = ({ children }) => {
 
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  let currentPage = JSON.parse(localStorage.getItem("page")!);
-  const [page, setPage] = useState<string | number>(
-    currentPage ? currentPage : 0
-  );
+  const [page, setPage] = useState<string | number>(0);
   const [selectedTodo, setSelectedTodo] = useState<string | number | null>(
     null
   );
