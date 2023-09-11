@@ -21,12 +21,10 @@ export default function DateRangePicker() {
         selected={selectedDate}
         onChange={( date: Date | null) => {
           setSelectedDate(date);
-          // console.log("date", date);
         }}
         onMonthChange={(date) => {
           // setSelectedDate(date);
           // setSelectedTime(null);
-          // console.log("date", date);
         }}
         renderCustomHeader={({
           date,

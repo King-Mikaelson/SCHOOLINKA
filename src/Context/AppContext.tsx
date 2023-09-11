@@ -10,7 +10,6 @@ const AppContext = createContext<AppContextProp>(null!);
 export default AppContext;
 
 export const AppProvider: React.FC<AppContextProp> = ({ children }) => {
-  // console.log(todoData);
 
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
@@ -92,7 +91,7 @@ export const AppProvider: React.FC<AppContextProp> = ({ children }) => {
 
   function updateArrayWithRandomValues(array: Item[]) {
     const startDate = new Date(2023, 8, 1); // 1st September
-    const endDate = new Date(2023, 8, 11); // 11th September
+    const endDate = new Date(); // 11th September
 
     for (let i = 0; i < array.length; i++) {
       const randomDate = formatDate(getRandomDate(startDate, endDate));

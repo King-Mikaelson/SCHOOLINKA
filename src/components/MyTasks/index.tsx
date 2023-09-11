@@ -7,7 +7,8 @@ import updateLocale from "dayjs/plugin/updateLocale";
 import calendar from "dayjs/plugin/calendar";
 
 function MyTasks({ currentItems }: any) {
-  const { ToggleTextsCompletedById, selectedTodo,selectedDate, formatDate } = useContext(AppContext);
+  const { ToggleTextsCompletedById, selectedTodo, selectedDate, formatDate } =
+    useContext(AppContext);
   const navigate = useNavigate();
 
   const handleChange = (
@@ -54,7 +55,6 @@ function MyTasks({ currentItems }: any) {
     },
   });
 
-
   return (
     <div className="pb-4 pt-8">
       <h2 className="text-[#101828] text-base font-workSans font-semibold">
@@ -62,7 +62,7 @@ function MyTasks({ currentItems }: any) {
       </h2>
 
       <div className="flex flex-col gap-5 py-4">
-        {currentItems.length > 0 ?
+        {currentItems.length > 0 ? (
           currentItems?.map((item: Item, index: number) => (
             <div
               key={item.id}
@@ -121,7 +121,12 @@ function MyTasks({ currentItems }: any) {
                 </p>
               </div>
             </div>
-          )) : <div className="text-[#101828] font-workSans font-medium text-xl cursor-pointer py-10  flex justify-center items-center"><p>There are no Tasks for {`${formatDate(selectedDate!)}.`}</p></div>}
+          ))
+        ) : (
+          <div className="text-[#101828] font-workSans font-medium text-xl cursor-pointer py-10  flex justify-center items-center">
+            <p>There are no Tasks for {`${formatDate(selectedDate!)}.`}</p>
+          </div>
+        )}
       </div>
     </div>
   );
