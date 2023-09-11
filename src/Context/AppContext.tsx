@@ -42,9 +42,12 @@ export const AppProvider: React.FC<AppContextProp> = ({ children }) => {
     return sortArray().filter((item) => item.date === formatDate(selectedDate!))
   }
  
-  console.log(returnFilteredDates())
   useEffect(() => {
     sortArray();
+  }, [texts]);
+
+  useEffect(() => {
+    returnFilteredDates();
   }, [texts]);
 
 

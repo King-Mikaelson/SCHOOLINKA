@@ -17,7 +17,6 @@ function MyTasks({ currentItems }: any) {
   ) => {
     e.stopPropagation();
     ToggleTextsCompletedById(item);
-    console.log("clicked");
   };
 
   function convert24hrsto12hrs(inputTime: string) {

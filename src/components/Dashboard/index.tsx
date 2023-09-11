@@ -29,7 +29,7 @@ function Dashboard() {
   const month = selectedDate?.getMonth()! + 1; // Change to the desired month (1 = January)
 
   const daysOfWeekForSelectedMonth = generateDaysOfWeekForMonth(year!, month!);
-  console.log(daysOfWeekForSelectedMonth)
+  // console.log(daysOfWeekForSelectedMonth)
 
   const [selectedItemIndex, setSelectedItemIndex] = useState<null | number>(
     1

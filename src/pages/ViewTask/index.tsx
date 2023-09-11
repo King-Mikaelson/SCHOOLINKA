@@ -10,7 +10,6 @@ import { BottomSheet } from "react-spring-bottom-sheet";
 
 function ViewTask() {
   const { id } = useParams();
-  console.log(id);
   const navigate = useNavigate();
   const { DeleteTextsById,texts,  setSelectedTodo} = useContext(AppContext);
   const [open, setOpen] = useState(false);
