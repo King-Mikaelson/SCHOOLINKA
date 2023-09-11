@@ -6,17 +6,14 @@ import AppContext from "../../Context/AppContext";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { BottomSheet } from "react-spring-bottom-sheet";
-import { toast } from "react-toastify";
 
-type Props = {};
 
-function ViewTask({}: Props) {
+function ViewTask() {
   const { id } = useParams();
   console.log(id);
   const navigate = useNavigate();
-  const { DeleteTextsById,texts, selectedTodo, setSelectedTodo} = useContext(AppContext);
+  const { DeleteTextsById,texts,  setSelectedTodo} = useContext(AppContext);
   const [open, setOpen] = useState(false);
-  const focusRef = useRef<HTMLButtonElement>();
   const sheetRef = useRef<any>();
   const [expandOnContentDrag, setExpandOnContentDrag] = useState(true);
 

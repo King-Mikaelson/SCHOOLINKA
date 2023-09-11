@@ -19,6 +19,7 @@ function Dashboard() {
       daysOfWeek.push({
         id,
         day: dayName,
+        date:date
       });
     }
 
@@ -27,15 +28,17 @@ function Dashboard() {
   const year = selectedDate?.getFullYear(); // Change to the desired year
   const month = selectedDate?.getMonth()! + 1; // Change to the desired month (1 = January)
 
-  const daysOfWeekForJanuary = generateDaysOfWeekForMonth(year!, month!);
-  console.log( daysOfWeekForJanuary)
+  const daysOfWeekForSelectedMonth = generateDaysOfWeekForMonth(year!, month!);
+  console.log(daysOfWeekForSelectedMonth)
 
   const [selectedItemIndex, setSelectedItemIndex] = useState<null | number>(
     1
   );
 
-  const handleItemClick = (index: number) => {
+  const handleItemClick = (index: number, date:Date) => {
     setSelectedItemIndex(index);
+    setSelectedDate(date)
+
   };
 
   useEffect(() => {
@@ -49,9 +52,9 @@ function Dashboard() {
       </h2>
 
       <div className="flex gap-3 overflow-scroll">
-        {daysOfWeekForJanuary.map((item, index) => (
+        {daysOfWeekForSelectedMonth.map((item, index) => (
           <div
-            onClick={() => handleItemClick(index)}
+            onClick={() => handleItemClick(index, item.date)}
             key={item.id}
             className={`${
               selectedItemIndex === index
