@@ -1,5 +1,3 @@
-import { AiOutlineClose } from 'react-icons/ai';
-import * as React from "react"
 import { CalendarIcon } from "@radix-ui/react-icons"
 import { addDays, format } from "date-fns"
 
@@ -23,7 +21,6 @@ import { useContext } from 'react';
 
 export function DatePickerWithPresets() {
   const{date, setDate} = useContext(AppContext)
-  // const [date, setDate] = React.useState<Date>()
 
   return (
     <Popover>

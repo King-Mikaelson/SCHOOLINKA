@@ -1,4 +1,4 @@
-import  { useContext, useState } from "react";
+import  { useContext} from "react";
 import dayjs from "dayjs";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,14 +17,12 @@ export default function DateRangePicker() {
       <DatePicker
         wrapperClassName="datePicker"
         inline={true}
-        className="w-[100000px]"
         selected={selectedDate}
         onChange={( date: Date | null) => {
           setSelectedDate(date);
         }}
         onMonthChange={(date) => {
-          // setSelectedDate(date);
-          // setSelectedTime(null);
+          setSelectedDate(date);
         }}
         renderCustomHeader={({
           date,
