@@ -1,6 +1,3 @@
-import {FiSettings} from "react-icons/fi";
-import {BsBell} from "react-icons/bs"
-import {HiMenuAlt1} from "react-icons/hi"
 import {FaMicrophone} from "react-icons/fa"
 import { useNavigate } from "react-router-dom";
 

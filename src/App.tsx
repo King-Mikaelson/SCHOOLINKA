@@ -1,18 +1,19 @@
 import { SetStateAction } from "react";
 import "./App.css";
-import TodoList from "./components/TodoList";
 import { AppProvider } from "./Context/AppContext";
 import { ToastContainer } from "react-toastify";
 import { Item } from "./types/types";
 import { Routes, Route } from "react-router-dom";
-import AddTask from "./components/AddTask";
-import EditTask from "./components/EditTask";
-import TasksLayout from "./components/TaskLayout";
+import AddTask from "./pages/AddTask";
+import EditTask from "./pages/EditTask";
+import TasksLayout from "./pages/TaskLayout/index";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import ViewTask from "./components/ViewTask";
-import BottomMobileInput from "./BottomMobileInput";
+import ViewTask from "./pages/ViewTask";
+import BottomMobileInput from "./components/BottomMobileInput";
 import 'react-toastify/dist/ReactToastify.css';
+import TasksList from "./pages/TasksList";
+import Layout from "./pages/Layout";
 
 function App() {
   return (
@@ -57,7 +58,7 @@ function App() {
         <Header />
         <Hero />
         <Routes>
-          <Route path="/" element={<TodoList />} />
+          <Route path="/" element={<Layout />} />
           <Route path="/task" element={<TasksLayout />}>
             <Route path="/task/add" element={<AddTask />} />
             <Route path="/task/:id" element={<ViewTask />} />

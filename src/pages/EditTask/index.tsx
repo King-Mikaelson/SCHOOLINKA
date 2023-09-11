@@ -1,5 +1,5 @@
 import { AiOutlineClose } from "react-icons/ai"
-import { DatePickerWithPresets } from "../DatePickerWithPresets"
+import { DatePickerWithPresets } from "../../components/DatePickerWithPresets"
 import React, { useContext, useEffect, useRef, useState } from "react"
 import AppContext from "../../Context/AppContext"
 import {useParams} from "react-router-dom"
@@ -7,7 +7,6 @@ import {AiTwotoneBell} from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import { toast } from "react-toastify"
-
 
 
 function EditTask() {

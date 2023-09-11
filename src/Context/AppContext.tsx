@@ -2,8 +2,6 @@ import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
 import { AppContextProp, Item } from "../../src/types/types";
 import { toast } from "react-toastify";
-import _ from "lodash";
-import todoData from "../data";
 import { useNavigate } from "react-router-dom";
 const AppContext = createContext<AppContextProp>(null!);
 

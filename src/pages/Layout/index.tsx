@@ -1,9 +1,10 @@
-import Dashboard from '../Dashboard'
-import {Outlet} from "react-router-dom"
-import Pagination from '../Pagination'
+import Calendar from '../../components/Calendar'
+import Dashboard from '../../components/Dashboard'
+import Pagination from '../../components/Pagination'
 
 
-function TasksLayout() {
+function Layout() {
+
 
   return (
 <div className="md:grid  2xl:grid-cols-[1fr,600px] xl:grid-cols-[850px,1fr] lg:grid-cols-[500px,1fr] md:grid-cols-2  px-6 lg:px-16 md:divide-x-2 gap-2">
@@ -11,11 +12,11 @@ function TasksLayout() {
     <Dashboard/>
    <Pagination/>
     </div>
-    <div className='w-full block'>
-    <Outlet/>
+    <div className='w-full hidden md:block'>
+    <Calendar/>
     </div>
 </div>
   )
 }
 
-export default TasksLayout
+export default Layout
